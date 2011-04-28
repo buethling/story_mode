@@ -1,0 +1,17 @@
+<tr>
+  <td class="story">
+    <span class="title"><%= story.title %></span>
+    <span class="blurb"><%= story.blurb %></span>
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(story.created_at) %> ago.
+    </span>
+  </td>
+  <% user = story.user rescue User.find(story.user_id) %>
+  <% if current_user?(user) %>
+    <td>
+      <%= link_to "delete", story, :method => :delete,
+                                   :confirm => "You sure?",
+                                   :title => story.content %>
+    </td>
+  <% end %>
+</tr>
