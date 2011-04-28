@@ -7,6 +7,13 @@ class PagesController < ApplicationController
     end
   end
 
+  def stories
+    @title = "Public Stories"
+    if signed_in?
+      @title = "Your Stories"
+    end
+  end
+
   def contact
     @title = "Contact"
   end

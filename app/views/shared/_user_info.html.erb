@@ -9,3 +9,8 @@
     </span>
   </a>
 </div>
+<a href="<%= current_user.stories %>">
+  <span class="microposts">
+    <%= pluralize(current_user.stories.count, "stories") %>
+  </span>
+</a>

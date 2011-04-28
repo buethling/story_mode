@@ -1,7 +1,10 @@
 SampleApp::Application.routes.draw do
+  get "stories/new"
+
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :microposts, :only => [:create, :destroy]
+  resources :stories
 
   get "sessions/new"
 
@@ -12,6 +15,7 @@ SampleApp::Application.routes.draw do
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
+  match '/stories', :to => 'pages#stories'
 
   root :to => 'pages#home'
   # The priority is based upon order of creation:
