@@ -1,7 +1,15 @@
 class StoriesController < ApplicationController
+  before_filter :set_stories, :except => [:index, :create, :new]
+  before_filter :authenticate, :only => [:create, :destroy]
+  before_filter :authorized_user, :only => :destroy
+
   def new
     @title = "New Story"
-    @story = Story.new if signed_in?
+    if signed_in?
+      @story = Story.new
+    else
+      redirect_to root_path
+    end
   end
 
   def create
@@ -15,8 +23,6 @@ class StoriesController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @stories = @user.stories.paginate(:page => params[:page])
     @title = "Stories | Show"
   end
 
@@ -25,4 +31,17 @@ class StoriesController < ApplicationController
     @title = "Stories"
   end
 
+  def destroy
+    @story.destroy
+    redirect_back_or root_path
+  end
+
+  private
+    def authorized_user
+      redirect_to root_path unless current_user?(@story.user)
+    end
+
+    def set_stories
+      @story = Story.find(params[:id])
+    end
 end

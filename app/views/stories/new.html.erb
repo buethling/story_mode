@@ -1,26 +1,22 @@
-<h1>Stories#new</h1>
-<% if signed_in? %>
-  <%= form_for @story do |f| %>
-    <%= render 'shared/error_messages', :object => f.object %>
+<h1>New Story</h1>
+<%= form_for @story do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
 
-    <div class="label">
-      <%= f.label :title, "Title" %>
-    </div>
-    <div class="field">
-      <%= f.text_field :title %>
-    </div>
+  <div class="label">
+    <%= f.label :title, "Title" %>
+  </div>
+  <div class="field">
+    <%= f.text_field :title %>
+  </div>
 
-    <div class="label">
-      <%= f.label :blurb, "Blurb" %>
-    </div>
-    <div class="field">
-      <%= f.text_area :blurb %>
-    </div>
+  <div class="label">
+    <%= f.label :blurb, "Blurb" %>
+  </div>
+  <div class="field">
+    <%= f.text_area :blurb %>
+  </div>
 
-    <div class="actions">
-      <%= f.submit "Create" %>
-    </div>
-  <% end %>
-<% else %>
-  <% render 'pages/home' %>
+  <div class="actions">
+    <%= f.submit "Create" %>
+  </div>
 <% end %>

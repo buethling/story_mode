@@ -1,7 +1,7 @@
 <tr>
   <td class="story">
-    <span class="title">Title: <%= story.title %></span><br />
-    <span class="blurb">Blurb: <%= story.blurb %></span>
+    <span class="title">Title: <%= link_to story.title, story_path(story) %></span><br />
+    <span class="blurb">Blurb: <%= story.blurb %></span><br />
     <span class="timestamp">
       Posted <%= time_ago_in_words(story.created_at) %> ago.
     </span>

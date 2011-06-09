@@ -1,0 +1,10 @@
+<h1>Stories</h1><%= link_to "new", new_story_path %>
+<% if !@stories.empty? %>
+  <table class="microposts" summary="Stories">
+    <%= render @stories %>
+  </table>
+<% else %>
+  <table class="microposts" summary="Stories">
+    No Stories
+  </table>
+<% end %>
