@@ -1,2 +1,12 @@
 Title: <%= @story.title %><br />
 Blurb: <%= @story.blurb %><br />
+<hr />
+<% if !@phrase_feed.empty? %>
+  <table class="phrases" summary="Story phrases">
+    <%= render @phrase_feed %>
+  </table>
+  <%= will_paginate @phrase_feed %>
+<% else %>
+  Nothing yet.
+<% end %>
+<%= render 'phrases/phrase_form' %>

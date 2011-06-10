@@ -24,6 +24,8 @@ class StoriesController < ApplicationController
 
   def show
     @title = "Stories | Show"
+    @phrase_feed = @story.phrases.paginate(:page => params[:page])
+    @phrase = Phrase.new
   end
 
   def index
@@ -43,5 +45,6 @@ class StoriesController < ApplicationController
 
     def set_stories
       @story = Story.find(params[:id])
+      session[:current_story] = @story
     end
 end

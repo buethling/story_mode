@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :microposts, :dependent => :destroy
   has_many :stories
+  has_many :phrases
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
