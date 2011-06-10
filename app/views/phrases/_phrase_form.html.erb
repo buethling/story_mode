@@ -1,7 +1,5 @@
-<%= form_for @phrase do |f| %>
+<%= form_for([@story, @phrase]) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
-   <div><input name="phrase[story_id]" type="hidden" value="<%= session[:current_story].id %>" /></div>
-   <div><input name="phrase[user_id]" type="hidden" value="<%= current_user.id %>" /></div>
   <div class="field">
     <%= f.text_area :content %>
   </div>

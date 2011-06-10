@@ -8,5 +8,5 @@ class Phrase < ActiveRecord::Base
   validates :user_id, :presence => true
   validates :story_id, :presence => true
 
-  default_scope :order => 'phrases.created_at DESC'
+  default_scope :order => 'phrases.created_at ASC'
 end

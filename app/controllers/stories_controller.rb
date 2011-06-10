@@ -45,6 +45,5 @@ class StoriesController < ApplicationController
 
     def set_stories
       @story = Story.find(params[:id])
-      session[:current_story] = @story
     end
 end
