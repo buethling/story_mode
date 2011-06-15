@@ -10,7 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110609024109) do
+ActiveRecord::Schema.define(:version => 20110615004417) do
+
+  create_table "characters", :force => true do |t|
+    t.string   "story_id"
+    t.string   "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "characters", ["story_id"], :name => "index_characters_on_story_id"
+  add_index "characters", ["user_id"], :name => "index_characters_on_user_id"
 
   create_table "microposts", :force => true do |t|
     t.string   "content"
@@ -35,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20110609024109) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "title"
+    t.integer  "character_count", :default => 5
   end
 
   add_index "stories", ["title"], :name => "index_stories_on_title"

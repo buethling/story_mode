@@ -1,5 +1,6 @@
 Title: <%= @story.title %><br />
 Blurb: <%= @story.blurb %><br />
+<%= render 'stories/character_count_form' %>
 <hr />
 <% if !@phrase_feed.empty? %>
   <table class="phrases" summary="Story phrases">

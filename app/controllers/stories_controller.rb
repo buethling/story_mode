@@ -1,7 +1,7 @@
 class StoriesController < ApplicationController
   before_filter :set_stories, :except => [:index, :create, :new]
-  before_filter :authenticate, :only => [:create, :destroy]
-  before_filter :authorized_user, :only => :destroy
+  before_filter :authenticate, :only => [:create, :destroy, :update]
+  before_filter :authorized_user, :only => [:destroy]
 
   def new
     @title = "New Story"
@@ -20,6 +20,13 @@ class StoriesController < ApplicationController
     else
       render 'pages/home'
     end
+  end
+
+  def update
+    if @story.update_attributes(params[:story])
+      flash[:success] = "Story updated!"
+    end
+    redirect_to story_path(@story)
   end
 
   def show

@@ -6,6 +6,7 @@ SampleApp::Application.routes.draw do
   resources :microposts, :only => [:create, :destroy]
   resources :stories do
     resources :phrases
+    resources :characters
   end
 
   get "sessions/new"
