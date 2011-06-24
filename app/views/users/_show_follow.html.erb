@@ -1,0 +1,19 @@
+<table summary="Information about following/followers">
+  <tr>
+    <td class="main">
+      <h1><%= @title %></h1>
+
+      <% unless @stories.empty? %>
+        <ul class="users">
+          <%= render @stories %>
+        </ul>
+        <%= will_paginate @stories %>
+      <% end %>
+    </td>
+    <td class="sidebar round">
+      <strong>Name</strong> <%= @user.name %><br />
+      <strong>URL</strong> <%= link_to user_path(@user), @user %><br />
+      <strong>Microposts</strong> <%= @user.microposts.count %>
+    </td>
+  </tr>
+</table>

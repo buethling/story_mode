@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110615004417) do
+ActiveRecord::Schema.define(:version => 20110624010448) do
 
   create_table "characters", :force => true do |t|
     t.string   "story_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20110615004417) do
   end
 
   add_index "characters", ["story_id"], :name => "index_characters_on_story_id"
+  add_index "characters", ["user_id", "story_id"], :name => "index_characters_on_user_id_and_story_id", :unique => true
   add_index "characters", ["user_id"], :name => "index_characters_on_user_id"
 
   create_table "microposts", :force => true do |t|

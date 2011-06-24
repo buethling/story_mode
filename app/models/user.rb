@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :microposts, :dependent => :destroy
   has_many :stories
   has_many :phrases
+  has_many :characters, :dependent => :destroy
+  has_many :following, :through => :characters, :source => :story_id
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -41,6 +43,18 @@ class User < ActiveRecord::Base
   def self.authenticate_with_salt(id, cookie_salt)
     user = find_by_id(id)
     (user && user.salt == cookie_salt) ? user : nil
+  end
+
+  def following?(story)
+    self.characters.find_by_story_id(story)
+  end
+
+  def follow!(story)
+    self.characters.create!(:story_id => story.id)
+  end
+
+  def unfollow!(story)
+    self.characters.find_by_story_id(story).destroy
   end
 
   private

@@ -1,9 +1,9 @@
 class Character < ActiveRecord::Base
-  before_filter :authenticate
+  attr_accessible :story_id
 
-  belongs_to: story
+  belongs_to :story
+  belongs_to :user
 
-  def create
-    
-  end
+  validates :story_id, :presence => true
+  validates :user_id, :presence => true
 end

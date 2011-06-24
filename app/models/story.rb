@@ -4,6 +4,7 @@ class Story < ActiveRecord::Base
   belongs_to :user
   has_many :phrases
   has_many :characters, :dependent => :destroy
+  has_many :followers, :through => :characters, :source => :user
 
   validates :user_id, :presence => true
   validates :title, :presence => true, :length => { :maximum => 250 }
@@ -12,11 +13,7 @@ class Story < ActiveRecord::Base
 
   default_scope :order => 'stories.created_at DESC'
 
-  def following?(user)
-    characters.find_by_user_id(user)
-  end
-
-  def follow!(user)
-    characters.create!(:user_id => user.id)
+  def follower?(user)
+    self.characters.find_by_user_id(user)
   end
 end
