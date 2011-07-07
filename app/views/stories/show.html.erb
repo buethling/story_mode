@@ -1,14 +1,27 @@
+<%= javascript_tag do %>
+new Ajax.PeriodicalUpdater("updateDiv", 
+    "<%= story_path + '/phrases' %>", 
+    { frequency: 10, 
+      decay: 2,
+      method: 'get' })
+<% end %>
+
 Title: <%= @story.title %><br />
 Blurb: <%= @story.blurb %><br />
 <%= @story.followers.count %> of <%= pluralize(@story.character_count, "character") %> are participating in this story.
 <%= render 'follow_form' if signed_in? %>
 <hr />
 <% if !@phrase_feed.empty? %>
-  <table class="phrases" summary="Story phrases">
-    <%= render @phrase_feed %>
-  </table>
+  <div id="updateDiv">
+    <table class="phrases" summary="Story phrases">
+      <%= render @phrase_feed %>
+    </table>
+  </div>
   <%= will_paginate @phrase_feed %>
 <% else %>
   Nothing yet.
 <% end %>
-<%= render 'phrases/phrase_form' if current_user.following?(@story) %>
+<% if current_user.id == @story.user_id %>
+  <%= render 'phrases/phrase_form' %>
+<% end %>
+

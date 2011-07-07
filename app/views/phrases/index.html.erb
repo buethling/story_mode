@@ -1,0 +1,8 @@
+<% if !@phrase_feed.empty? %>
+  <table class="phrases" summary="Story phrases">
+    <%= render @phrase_feed %>
+  </table>
+  <%= will_paginate @phrase_feed %>
+<% else %>
+  Nothing yet.
+<% end %>

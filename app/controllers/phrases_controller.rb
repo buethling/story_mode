@@ -10,7 +10,9 @@ class PhrasesController < ApplicationController
     end
   end
 
-  def destroy
-
+  def index
+    @story = Story.find(params[:story_id])
+    @phrase_feed = @story.phrases.paginate(:page => params[:page])
+    render 'phrases/index', :layout => false 
   end
 end
