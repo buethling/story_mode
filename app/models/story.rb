@@ -1,5 +1,5 @@
 class Story < ActiveRecord::Base
-  attr_accessible :title, :blurb, :character_count
+  attr_accessible :title, :blurb, :character_count, :turn
 
   belongs_to :user
   has_many :phrases
