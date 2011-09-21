@@ -31,12 +31,14 @@ class StoriesController < ApplicationController
 
   def show
     @title = "Stories | Show"
-    @phrase_feed = @story.phrases.paginate(:page => params[:page])
+    @phrase_feed = @story.phrases
     @phrase = Phrase.new
+    @followers = @story.followers
+    set_turn unless @followers.empty?
   end
 
   def index
-    @stories = Story.paginate(:page => params[:page], :per_page => 5)
+    @stories = Story.paginate(:page => params[:page], :per_page => 10)
     @title = "Stories"
   end
 
@@ -52,5 +54,12 @@ class StoriesController < ApplicationController
 
     def set_stories
       @story = Story.find(params[:id])
+    end
+
+    def set_turn
+      if @story.turn.nil?
+          @story.turn = @followers.first[:id]
+          @story.save
+      end
     end
 end

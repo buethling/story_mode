@@ -3,6 +3,7 @@
   <table class="microposts" summary="Stories">
     <%= render @stories %>
   </table>
+  <%= will_paginate @stories %>
 <% else %>
   <table class="microposts" summary="Stories">
     No Stories
