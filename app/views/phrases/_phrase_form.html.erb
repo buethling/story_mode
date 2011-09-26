@@ -1,9 +1,10 @@
 <%= form_for([@story, @phrase]) do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
-  <div class="field">
-    <%= f.text_area :content %>
+  <div class="clearfix">
+    <%= f.text_area :content, :class => "xxlarge", :rows => "5" %>
   </div>
-  <div class="actions">
-    <%= f.submit "Submit" %>
+  <div class="actions phrase_form">
+    <%= f.submit "Submit", :class => "btn primary" %>
+    <input class="btn disabled" type="button" value="Pass" alt="Not functioning yet." disabled="true" />
   </div>
 <% end %>

@@ -1,22 +1,31 @@
 <% if signed_in? %>
-  <table class="front" summary="For signed-in users">
-    <tr>
-      <td class="main">
-        <h1 class="micropost">What's up?</h1>
-        <%= render 'shared/micropost_form' %>
-        <%= render 'shared/feed' %>
-      </td>
-      <td class="sidebar round">
-        <%= render 'shared/user_info' %>
-      </td>
-    </tr>
-  </table>
+  <div class="row">
+    <div class="span16">
+      <div class="page-header">
+        <h1>Home</h1>
+      </div>
+      <%= render 'shared/home_content' %>
+    </div>
+  </div>
 <% else %>
-  <h1>Sample App</h1>
-
-  <p>
-    Welcome to StoryMode!
-  </p>
-
-  <%= link_to "Sign up now!", signup_path, :class => "signup_button round" %>
+  <div class="hero-unit">
+    <h1>Welcome to StoryMode!</h1>
+    <p>StoryMode is a collaborative story writing tool. You can use StoryMode to continue the epic story from your favorite
+       Pen &amp; Paper RPG when you are between sessions, to collaboratively create a brand new story of heros and villians 
+       with your friends or family or come up with some other creative way to use it!</p>
+    <p><%= link_to 'Sign up now! &raquo;'.html_safe, signup_path, :class => "btn primary large" %></p>
+  </div>
+  <div class="row">
+    <div class="span5">
+      <h2>Take Turns</h2>
+      <p>StoryMode is turn-based so you won't get lost in a pile of back-logs and miss out on the story. 
+         Don't have anything to say on this turn? You can pass to the next person and say your piece next time around.</p>
+    </div>
+    <div class="span5">
+      <h2>Privacy</h2>
+      <p>StoryMode allows you to make your story private, meaning it won't show up in searches or the story page. 
+         You'll have to send the link to a friend so they can join the story. Public stories on the other hand will show up
+         in both and possibly be seen even by people who do not have an account.</p>
+    </div>
+  </div>
 <% end %>

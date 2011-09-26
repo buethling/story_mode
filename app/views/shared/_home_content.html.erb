@@ -1,0 +1,35 @@
+<h2>My Stories</h2>
+<% if @stories.empty? %>
+  <h4>Sorry, no stories yet.</h4>
+<% else %>
+  <div class="row">
+    <div class="span16">
+      <%= render @stories %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span16">
+      <div class="digg_pagination">
+        <%= will_paginate @stories, :container => false %>
+      </div>
+    </div>
+  </div>
+<% end %><br />
+<br />
+<h2>Stories I'm Part of</h2>
+<% if @joined_stories.empty? %>
+  <h4>Sorry, no stories yet.</h4>
+<% else %>
+  <div class="row">
+    <div class="span16">
+      <%= render @joined_stories %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span16">
+      <div class="digg_pagination">
+        <%= will_paginate @joined_stories, :container => false %>
+      </div>
+    </div>
+  </div>
+<% end %>

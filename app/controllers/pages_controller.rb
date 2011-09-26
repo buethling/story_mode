@@ -2,8 +2,8 @@ class PagesController < ApplicationController
   def home
     @title = "Home"
     if signed_in?
-      @micropost = Micropost.new
-      @feed_items = current_user.feed.paginate(:page => params[:page], :per_page => 15)
+      @stories = current_user.stories.paginate(:page => params[:page], :per_page => 5)
+      @joined_stories = @stories  #Character.find_by_user_id(current_user)
     end
   end
 

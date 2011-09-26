@@ -3,21 +3,47 @@
   <head>
       <title><%= @title %></title>
       <%= csrf_meta_tag %>
-      <%= stylesheet_link_tag 'application' %>
-      <%= javascript_include_tag 'application' %>
+      <%= render 'layouts/stylesheets' %>
+      <%= javascript_include_tag "application" %>
   </head>
   <body>
-      <div class="container">
-      <%= render 'layouts/header' %>
-      <section class="round">
-         <% flash.each do |key, value| %>
-            <%= content_tag(:div, value, :class => "flash #{key}") %>
-         <% end %>
-
-         <%= yield %>
-      </section>
-      <%= render 'layouts/footer' %>
-      <%= debug(params) if Rails.env.development? %>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="<%= root_path %>">StoryMode <span class="label important">alpha</span></a>
+          <%= render 'layouts/links'%>
+        </div>
       </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span16">
+          <header>
+            <%= render 'layouts/header' %>
+          </header>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span16">
+          <section>
+            <% flash.each do |key, value| %>
+            <%= content_tag(:div, value, :class => "alert-message #{key}") %>
+            <% end %>
+            
+            <%= yield %>
+          </section>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span16">
+          <footer>
+            <nav>
+              <%= render 'layouts/footer' %>
+            </nav>
+          </footer>
+        </div>
+      </div>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
   </body>
 </html>

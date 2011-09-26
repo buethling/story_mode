@@ -7,6 +7,7 @@ class StoriesController < ApplicationController
     @title = "New Story"
     if signed_in?
       @story = Story.new
+      @count_opts = [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7]]
     else
       redirect_to root_path
     end
@@ -38,13 +39,13 @@ class StoriesController < ApplicationController
   end
 
   def index
-    @stories = Story.paginate(:page => params[:page], :per_page => 10)
+    @stories = Story.paginate(:page => params[:page], :per_page => 5)
     @title = "Stories"
   end
 
   def destroy
     @story.destroy
-    redirect_back_or root_path
+    redirect_to stories_path
   end
 
   private

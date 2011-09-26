@@ -1,0 +1,20 @@
+<ul class="nav">
+  <li><%= link_to "Home", root_path %></li>
+  <li><%= link_to "Stories", stories_path %></li>
+  <% if signed_in? %>
+    <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+    <% if current_user.admin? %>
+      <li><%= link_to "Users", users_path %></li>
+    <% end %>
+  <% end %>
+  <li><%= link_to "Help", help_path %></li>
+</ul>
+<% if signed_in? %>
+  <p class="pull-right">
+    Logged in as <%= current_user.name %> <%= link_to "Sign out", signout_path, :method => :delete, :class => "sign_in" %>
+  </p>
+<% else %>
+  <p class="pull-right">
+    Have an account? <%= link_to "Sign in", signin_path, :class => "sign_in" %>
+  </p>
+<% end %>

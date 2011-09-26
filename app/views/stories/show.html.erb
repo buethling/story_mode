@@ -1,32 +1,47 @@
-Title: <%= @story.title %><br />
-Blurb: <%= @story.blurb %><br />
-<%= @followers.count %> of <%= pluralize(@story.character_count, "character") %> are participating in this story.<br />
-<% unless @followers.empty? %>
-  Participants: 
-  <% @followers.each do |f| %>
-    <%= f[:name] + ',' %>
-  <% end %><br />
-<% end %>
-Turn: <%= @story.turn %><br />
-<%= render 'follow_form' if signed_in? %>
-<hr />
-<% if !@phrase_feed.empty? %>
-  <div id="updateDiv">
-    <table class="phrases" summary="Story phrases">
-      <%= render @phrase_feed %>
-    </table>
+<div class="page-header">
+  <div class="row">
+    <div class="span14">
+      <h1><%= @story.title %></h1>
+    </div>
+    <div class="span2">
+      <%= render 'follow_form' if signed_in? %>
+    </div>
   </div>
-<% else %>
-  Nothing yet.
-<% end %>
-<% if current_user.id == @story.turn %>
-  <%= render 'phrases/phrase_form' %>
-  <%= javascript_tag do %>
-    updatePhrases(<%= story_path %>);
-  <% end %>
-<% else %>
-  <%= javascript_tag do %>
-    refreshPage();
-  <% end %>
-<% end %>
-
+</div>
+<div class="well">
+  <h4><%= @story.blurb %><br />
+    <small>
+      <%= @followers.count %> of <%= pluralize(@story.character_count, "character") %> are participating in this story.<br />
+      <% unless @followers.empty? %>
+        Participants: 
+        <% @followers.each do |f| %>
+          <%= f[:name] %><%= ', ' unless f[:name].eql?(@followers.last[:name]) %>
+        <% end %><br />
+      <% end %>
+      Turn: <%= @story.turn %>
+    </small>
+  </h4>
+</div>
+<div class="row">
+  <div class="span16">
+    <% if !@phrase_feed.empty? %>
+      <%= render @phrase_feed %>
+    <% else %>
+      Nothing yet.
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="span16">
+    <% if current_user.id == @story.turn %>
+      <%= render 'phrases/phrase_form' %>
+      <%= javascript_tag do %>
+        updatePhrases('<%= story_path %>');
+      <% end %>
+    <% else %>
+      <%= javascript_tag do %>
+        refreshPage();
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,11 +1,26 @@
-<h1>Stories</h1><%= link_to "new", new_story_path %>
-<% if !@stories.empty? %>
-  <table class="microposts" summary="Stories">
-    <%= render @stories %>
-  </table>
-  <%= will_paginate @stories %>
+<div class="page-header">
+  <div class="row">
+    <div class="span2">
+      <h1>Stories</h1>
+    </div>
+    <div class="span2">
+      <%= link_to "New", new_story_path, :class => "btn success" %>
+    </div>
+  </div>
+</div>
+<% if @stories.empty? %>
+  <h4>Sorry, no stories yet.</h4>
 <% else %>
-  <table class="microposts" summary="Stories">
-    No Stories
-  </table>
+  <div class="row">
+    <div class="span16">
+      <%= render @stories %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span16">
+      <div class="digg_pagination">
+        <%= will_paginate @stories, :container => false %>
+      </div>
+    </div>
+  </div>
 <% end %>

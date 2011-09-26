@@ -1,13 +1,16 @@
 <% @user = User.find(phrase.user_id) %>
-<tr>
-  <td class="phrase">
-    <div class="content"><%= phrase.content %></div>
-    <div class="timestamp">
-      Posted <%= time_ago_in_words(phrase.created_at) %> ago.
+<div class="row phrase">
+  <div class="span14">
+    <div class="triangle-isosceles right">
+      <p>
+        <%= phrase.content %><br />
+        <br />
+        <small>Posted <%= time_ago_in_words(phrase.created_at) %> ago.</small>
+      </p>
     </div>
-  </td>
-  <td class="phrase_info">
-    <div><%= gravatar_for @user %></div>
-    <span class="username"><%= @user.name %></span>
-  </td>
-</tr>
+  </div>
+  <div class="span2">
+    <%= gravatar_for @user, :size => 45 %><br />
+    <%= @user.name %>
+  </div>
+</div>

@@ -1,17 +1,20 @@
-<tr>
-  <td class="story">
-    <span class="title">Title: <%= link_to story.title, story_path(story) %></span><br />
-    <span class="blurb">Blurb: <%= story.blurb %></span><br />
-    <span class="timestamp">
-      Posted <%= time_ago_in_words(story.created_at) %> ago.
-    </span>
-  </td>
-  <% user = story.user rescue User.find(story.user_id) %>
-  <% if current_user?(user) %>
-    <td>
-      <%= link_to "delete", story, :method => :delete,
-                                   :confirm => "You sure?",
-                                   :title => story.title %>
-    </td>
-  <% end %>
-</tr>
+<% user = story.user rescue User.find(story.user_id) %>
+<div class="well">
+  <div class="row">
+    <div class="span14">
+      <h3><%= link_to story.title, story_path(story) %></h3>
+      <h4>
+        <%= story.blurb %><br />
+        <small><%= time_ago_in_words(story.created_at) %> ago.</small>
+      </h4>
+    </div>
+    <div class="span1">
+      <% if current_user?(user) %>
+          <%= link_to "x", story, :class => "close",
+                                  :method => :delete,
+                                  :confirm => "You sure?",
+                                  :title => story.title %>
+      <% end %>
+    </div>
+  </div>
+</div>

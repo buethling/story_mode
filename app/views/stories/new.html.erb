@@ -1,27 +1,27 @@
-<h1>New Story</h1>
+<div class="page-header">
+  <h1>New Story</h1>
+</div>
 <%= form_for @story do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
-
-  <div class="label">
-    <%= f.label :title, "Title" %>
+  <div class="clearfix">
+    <%= f.label :title %>
+    <div class="input">
+      <%= f.text_field :title, :class => "xxlarge" %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.text_field :title %>
+  <div class="clearfix">
+    <%= f.label :blurb %>
+    <div class="input">
+      <%= f.text_area :blurb, :class => "xxlarge", :rows => "3" %>
+    </div>
   </div>
-
-  <div class="label">
-    <%= f.label :blurb, "Blurb" %>
-  </div>
-  <div class="field">
-    <%= f.text_area :blurb %>
-  </div>
-
-  <div class="field">
+  <div class="clearfix">
     <%= f.label :character_count, 'How many characters in this story?' %>
-    <%= f.select(:character_count, [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7]]) %>
+    <div class="input">
+      <%= f.select :character_count, @count_opts, {}, :class => "mini" %>
+    </div>
   </div>
-
   <div class="actions">
-    <%= f.submit "Create" %>
+    <%= f.submit "Create", :class => "btn primary" %>
   </div>
 <% end %>
