@@ -31,6 +31,7 @@ end
 group :test do
   gem 'rspec', '2.6.0'
   gem 'webrat', '0.7.3'
+  gem 'shoulda-matchers'
 end
 # Use unicorn as the web server
 # gem 'unicorn'
