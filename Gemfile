@@ -18,11 +18,12 @@ group :development do
 end
 
 group :production do
-  # gems specifically for Heroku go here
   gem "pg"
 end
 
 group :test do
+  gem 'simplecov'
+  gem 'capybara'
 end
 
 group :development, :test do
