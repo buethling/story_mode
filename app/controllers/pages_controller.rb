@@ -3,7 +3,7 @@ class PagesController < ApplicationController
     @title = "Home"
     if signed_in?
       @stories = current_user.stories.paginate(:page => params[:page], :per_page => 5)
-      @joined_stories = @stories  #Character.find_by_user_id(current_user)
+      @joined_stories = current_user.following.paginate(:page => params[:page], :per_page => 5)
     end
   end
 
