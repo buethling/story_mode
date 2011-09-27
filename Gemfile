@@ -26,6 +26,10 @@ group :test do
 end
 
 group :development, :test do
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-rails-assets'
+  gem 'guard-bundler'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
 end
