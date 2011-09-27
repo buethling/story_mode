@@ -1,7 +1,7 @@
 class CreateCharacters < ActiveRecord::Migration
   def self.up
     create_table :characters do |t|
-      t.string :story_id
+      t.integer :story_id
       t.integer :user_id
 
       t.timestamps
