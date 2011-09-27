@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :stories
   has_many :phrases
   has_many :characters, :dependent => :destroy
-  has_many :following, :through => :characters, :source => :story_id
+  has_many :following, :through => :characters, :source => :story
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

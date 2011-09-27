@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(:version => 20110712165421) do
 
   create_table "characters", :force => true do |t|
-    t.string   "story_id"
-    t.string   "user_id"
+    t.integer  "story_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
