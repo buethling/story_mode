@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     if @user.save
       sign_in @user
       flash.now[:success] = "Welcome to StoryMode!"
-      redirect_to @user
+      redirect_to root_path
     else
        @title = "Sign up"
        render 'new'
