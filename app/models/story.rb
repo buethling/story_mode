@@ -16,4 +16,9 @@ class Story < ActiveRecord::Base
   def follower?(user)
     self.characters.find_by_user_id(user)
   end
+
+  def full?
+    self.character_count == self.followers.count
+  end
+
 end
