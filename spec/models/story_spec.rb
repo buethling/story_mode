@@ -13,6 +13,12 @@ describe Story do
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:blurb) }
   it { should validate_presence_of(:character_count) }
+  it { should_not allow_value(8).for(:character_count) }
+  it { should allow_value(6).for(:character_count) }
+  it { should_not allow_value('x' * 251).for(:title) }
+  it { should allow_value('x' * 249).for(:title) }
+  it { should_not allow_value('x' * 2501).for(:blurb) }
+  it { should allow_value('x' * 2499).for(:blurb) }
 
   it "should know if a user is a follower of this story" do 
     user = mock_model(User)
