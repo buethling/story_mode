@@ -35,9 +35,6 @@
   <div class="span16">
     <% if current_user.id == @story.turn %>
       <%= render 'phrases/phrase_form' %>
-      <%= javascript_tag do %>
-        updatePhrases('<%= story_path %>');
-      <% end %>
     <% else %>
       <%= javascript_tag do %>
         refreshPage();

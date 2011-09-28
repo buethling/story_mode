@@ -11,5 +11,6 @@ function updatePhrases (path) {
 function refreshPage () {
     setInterval(function() {
         location.reload();
+         $('html, body').animate({scrollTop: $(document).height()}, 'slow');
     }, 30000);
 }
