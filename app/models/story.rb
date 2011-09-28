@@ -14,11 +14,11 @@ class Story < ActiveRecord::Base
   default_scope :order => 'stories.created_at DESC'
 
   def follower?(user)
-    self.characters.find_by_user_id(user)
+    self.followers.include?(user)
   end
 
   def full?
-    self.character_count == self.followers.count
+    self.character_count <= self.followers.count
   end
 
 end
