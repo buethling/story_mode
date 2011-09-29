@@ -33,7 +33,7 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'rb-fchange', :platform => :mswin
-  gem 'rb-notifu', :platform => :mswin
-  gem 'win32console', :platform => :mswin
+  gem 'rb-fchange', :platforms => [:mswin, :mingw]
+  gem 'rb-notifu', :platforms => [:mswin, :mingw]
+  gem 'win32console', :platforms => [:mswin, :mingw]
 end

@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
   before_filter :set_stories, :except => [:index, :create, :new]
-  before_filter :authenticate, :only => [:create, :destroy, :update]
+  before_filter :authenticate, :only => [:create, :destroy, :update, :show]
   before_filter :authorized_user, :only => [:destroy]
 
   def new
