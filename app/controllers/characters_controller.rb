@@ -9,6 +9,11 @@ class CharactersController < ApplicationController
 
   def destroy
     @story = Character.find(params[:id]).story_id
+    storyobj = Story.find(@story)
+    if storyobj.update_turn.turn = params[:id] 
+      storyobj.turn = nil
+      storyobj.save
+    end
     current_user.unfollow!(@story)
     flash[:success] = "You have been removed from the story."
     redirect_to stories_path 

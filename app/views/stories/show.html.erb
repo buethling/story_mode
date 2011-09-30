@@ -17,8 +17,8 @@
         <% @followers.each do |f| %>
           <%= f[:name] %><%= ', ' unless f[:name].eql?(@followers.last[:name]) %>
         <% end %><br />
+        Turn: <%= @turn %>
       <% end %>
-      Turn: <%= @turn %>
     </small>
   </h4>
 </div>

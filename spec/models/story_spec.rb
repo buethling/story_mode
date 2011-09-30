@@ -22,7 +22,7 @@ describe Story do
 
   it "should know if a user is a follower of this story" do 
     user = mock_model(User)
-    @story.stub_chain(:followers).and_return([user])
+    @story.stub(:followers).and_return([user])
     @story.follower?(user).should be_true
   end
 
@@ -31,4 +31,32 @@ describe Story do
     @story.stub_chain(:followers, :count).and_return(7)
     @story.full?.should be_true
   end
+
+  it "should be able set turn to first follower when previously nil" do
+    @story.turn = nil
+    @story.stub(:follower_ids).and_return([1])
+    @story.set_turn.turn.should eq 1
+  end
+
+  it "should be able to update turn to next follower (if there is more than one)" do
+    user = mock_model(User)
+    @story.stub(:follower_ids).and_return([1,2])
+    @story.stub(:followers).and_return([user,user])
+    @story.turn = 1
+    @story.update_turn.turn.should eq 2
+  end
+
+  it "should keep the turn on the current user when only one follower" do
+    user = mock_model(User)
+    @story.stub(:follower_ids).and_return([1])
+    @story.stub(:followers).and_return([user])
+    @story.turn = 1
+    @story.update_turn.turn.should eq 1
+  end
+
+  it "should update turn to nil when there are no longer any followers" do
+    @story.stub(:followers).and_return([])
+    @story.update_turn.turn.should eq nil
+  end
+
 end
