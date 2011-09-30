@@ -23,18 +23,7 @@ class PhrasesController < ApplicationController
   private
     def update_turn
       unless @current_story.turn.nil? && @followers.length <= 1 
-        followerIds = []
-        @followers.each {|follower| followerIds.push(follower[:id])}
-        index = followerIds.index(@current_story.turn)
-        index += 1
-        
-        #logger.debug "turn: #{@story}"
-        
-        if (index <= followerIds.length)
-          @current_story.turn = followerIds[index]
-        else
-          @current_story.turn = followerIds[0]
-        end
+        @current_story.turn=@current_story.follower_ids[((@current_story.follower_ids.index(@current_story.turn)+1)%@current_story.followers.count)]
         @current_story.save
       end
     end
