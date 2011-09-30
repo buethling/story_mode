@@ -35,8 +35,12 @@ class StoriesController < ApplicationController
     @phrase_feed = @story.phrases
     @phrase = Phrase.new
     @followers = @story.followers
-    set_turn unless @followers.empty?
-    @turn = User.find_by_id(@story.turn).name
+    if @followers.empty?
+      @turn = ""
+    else
+      @story.set_turn!
+      @turn = User.find_by_id(@story.turn).name
+    end
   end
 
   def index
@@ -58,10 +62,4 @@ class StoriesController < ApplicationController
       @story = Story.find(params[:id])
     end
 
-    def set_turn
-      if @story.turn.nil?
-          @story.turn = @followers.first[:id]
-          @story.save
-      end
-    end
 end
