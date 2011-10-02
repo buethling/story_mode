@@ -8,11 +8,9 @@ module Storyteller
         follower_ids = followers.map(&:id)
 
         if story.turn.nil?
-          story.update_attribute(:turn, follower_ids.first)
+          story.set_turn! follower_ids.first
         else
-          story.update_attribute(:turn, 
-            follower_ids[(follower_ids.index(story.turn)+1)%followers.count]
-          )
+          story.set_turn! follower_ids[(follower_ids.index(story.turn)+1)%followers.count]
         end
       end
     end

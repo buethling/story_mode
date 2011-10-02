@@ -10,7 +10,7 @@ describe Storyteller do
       User.new.tap { |u| u.stub(:id).and_return(1) }
     ])
     @story.stub(:turn).and_return(nil)
-    @story.should_receive(:update_attribute).with(:turn, 1).and_return(true)
+    @story.should_receive(:set_turn).with(1).and_return(true)
     Storyteller.advance @story
   end
 
@@ -21,7 +21,7 @@ describe Storyteller do
       end
     )
     @story.stub(:turn).and_return(1)
-    @story.should_receive(:update_attribute).with(:turn, 2).and_return(true)
+    @story.should_receive(:set_turn).with(2).and_return(true)
     Storyteller.advance @story
   end
 
@@ -30,14 +30,14 @@ describe Storyteller do
       User.new.tap { |u| u.stub(:id).and_return(1) }
     ])
     @story.stub(:turn).and_return(1)
-    @story.should_receive(:update_attribute).with(:turn, 1).and_return(true)
+    @story.should_receive(:set_turn).with(1).and_return(true)
     Storyteller.advance @story
   end
 
   it "should know how to pause the game" do 
     @story.stub(:turn).and_return(nil)
     @story.stub(:followers).and_return([])
-    @story.should_receive(:update_attribute).never
+    @story.should_receive(:set_turn).never
     Storyteller.advance @story
   end
 

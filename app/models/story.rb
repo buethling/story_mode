@@ -21,4 +21,13 @@ class Story < ActiveRecord::Base
   def full?
     self.character_count <= self.followers.count
   end
+
+  def set_turn(turn) 
+    self.turn = turn
+  end
+
+  def set_turn!(turn) 
+    self.set_turn(turn)
+    self.save
+  end
 end
