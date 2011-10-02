@@ -5,7 +5,7 @@ describe Storyteller do
     @story = Story.new
   end
 
-  it "know how to start the game" do
+  it "should know how to start the game" do
     @story.stub(:followers).and_return([
       User.new.tap { |u| u.stub(:id).and_return(1) }
     ])
@@ -25,7 +25,7 @@ describe Storyteller do
     Storyteller.advance @story
   end
 
-  it "should keep the turn on the current user when only one follower" do
+  it "should be able to correctly advance the game with one player" do 
     @story.stub(:followers).and_return([
       User.new.tap { |u| u.stub(:id).and_return(1) }
     ])
@@ -34,7 +34,7 @@ describe Storyteller do
     Storyteller.advance @story
   end
 
-  it "should update turn to nil when there are no longer any followers" do
+  it "should know how to pause the game" do 
     @story.stub(:turn).and_return(nil)
     @story.stub(:followers).and_return([])
     @story.should_receive(:update_attribute).never
