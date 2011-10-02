@@ -1,7 +1,8 @@
 class Story < ActiveRecord::Base
-  attr_accessible :title, :blurb, :character_count, :turn
+  attr_accessible :title, :blurb, :character_count
 
   belongs_to :user
+
   has_many :phrases
   has_many :characters, :dependent => :destroy
   has_many :followers, :through => :characters, :source => :user
@@ -21,30 +22,12 @@ class Story < ActiveRecord::Base
     self.character_count <= self.followers.count
   end
 
-  def update_turn
-    if self.followers.empty?
-      self.turn = nil
-    elsif self.turn.nil?
-      self.turn = follower_ids.first
-    else
-      self.turn = follower_ids[(follower_ids.index(turn)+1)%followers.count]
-    end
-    self
+  def set_turn(turn) 
+    self.turn = turn
   end
 
-  def update_turn!
-    self.update_turn.save!
+  def set_turn!(turn) 
+    self.set_turn(turn)
+    self.save
   end
-
-  def set_turn
-    if self.turn.nil?
-      self.turn = self.follower_ids.first
-    end
-    self
-  end
-
-  def set_turn!
-    self.set_turn.save!
-  end
-
 end
