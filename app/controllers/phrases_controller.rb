@@ -9,8 +9,8 @@ class PhrasesController < ApplicationController
     else
       render 'pages/home'
     end
-    
-    @current_story.update_turn! unless @current_story.followers.empty?
+   
+    Storyteller.advance(@current_story)
   end
 
   def index
