@@ -17,7 +17,7 @@
         <% @followers.each do |f| %>
           <%= f[:name] %><%= ', ' unless f[:name].eql?(@followers.last[:name]) %>
         <% end %><br />
-        Turn: <%= @turn %>
+        Turn: <%= User.find_by_id(@story.turn).name %>
       <% end %>
     </small>
   </h4>
@@ -27,7 +27,8 @@
     <% if !@phrase_feed.empty? %>
       <%= render @phrase_feed %>
     <% else %>
-      Nothing yet.
+      Nothing yet.<br />
+      <br />
     <% end %>
   </div>
 </div>

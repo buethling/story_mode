@@ -51,10 +51,12 @@ class User < ActiveRecord::Base
 
   def follow!(story)
     self.characters.create!(:story_id => story.id)
+    Storyteller.advance(story) if story.turn.nil?
   end
 
-  def unfollow!(story)
-    self.characters.find_by_story_id(story).destroy
+  def unfollow!(story_id)
+    self.characters.find_by_story_id(story_id).destroy
+    Storyteller.retreat Story.find(story_id)
   end
 
   private

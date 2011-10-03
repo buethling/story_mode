@@ -35,12 +35,6 @@ class StoriesController < ApplicationController
     @phrase_feed = @story.phrases
     @phrase = Phrase.new
     @followers = @story.followers
-    if @followers.empty?
-      @turn = ""
-    else
-      @story.set_turn!
-      @turn = User.find_by_id(@story.turn).name
-    end
   end
 
   def index

@@ -1,11 +1,19 @@
 <% user = story.user rescue User.find(story.user_id) %>
+<% followers = story.followers %>
 <div class="well">
   <div class="row">
     <div class="span14">
       <h3><%= link_to story.title, story_path(story) %></h3>
-      <h4>
-        <%= story.blurb %><br />
-        <small><%= time_ago_in_words(story.created_at) %> ago.</small>
+      <h4><%= story.blurb %><br />
+        <small>
+          <% unless followers.empty? %>
+            Participants: 
+            <% followers.each do |f| %>
+              <%= f[:name] %><%= ', ' unless f[:name].eql?(followers.last[:name]) %>
+            <% end %><br />
+          <% end %>
+          Last updated: <%= time_ago_in_words(story.updated_at) %> ago / Created: <%= time_ago_in_words(story.created_at) %> ago.
+        </small>
       </h4>
     </div>
     <div class="span1">

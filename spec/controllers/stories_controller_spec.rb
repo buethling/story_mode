@@ -8,4 +8,10 @@ describe StoriesController do
 
     it { should redirect_to(signin_path) }
   end
+  context "for logged in user" do
+    before do
+      @user = Factory(:user)
+      @story = Factory(:story)
+    end
+  end
 end

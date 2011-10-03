@@ -40,5 +40,22 @@ describe Storyteller do
     @story.should_receive(:set_turn).never
     Storyteller.advance @story
   end
-
+  
+  it "should handle when followers changes from some to none" do
+    @story.stub(:followers).and_return(nil)
+    @story.stub(:turn).and_return(nil)
+    @story.should_receive(:set_turn).with(nil).and_return(true)
+    Storyteller.clear @story
+  end
+  
+  it "should handle when followers changes from two to one" do
+    @story.stub(:followers).and_return(
+      2.times.map do |i|
+        User.new.tap { |u| u.stub(:id).and_return(i + 1) }
+      end
+    )
+    @story.stub(:turn).and_return(1)
+    @story.should_receive(:set_turn).with(2).and_return(true)
+    Storyteller.retreat(@story)
+  end
 end
