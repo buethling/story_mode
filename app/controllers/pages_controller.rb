@@ -25,4 +25,13 @@ class PagesController < ApplicationController
   def help
     @title = "Help"
   end
+  
+  def admin
+    if signed_in? && current_user.admin?
+      @title = "Administration"
+      @stories = Story.all
+    else
+      redirect_to root_path
+    end
+  end
 end

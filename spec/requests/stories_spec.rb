@@ -20,6 +20,8 @@ describe "Stories" do
     end
     
     it "should show 'Participants:'" do
+      visit('/stories/1')
+      click_button 'Join'
       visit stories_path
       page.should have_content("Participants:")
     end

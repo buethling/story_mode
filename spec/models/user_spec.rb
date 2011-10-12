@@ -8,6 +8,6 @@ describe User do
   
   it "should set turn if it's not set" do
     @user.follow! @story
-    @story.turn.should == 1    
+    @story.turn.should == 1 
   end
 end
