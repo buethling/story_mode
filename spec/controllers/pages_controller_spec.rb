@@ -19,20 +19,15 @@ describe PagesController do
   describe "GET 'admin'" do
     context "for admin users" do
       
-      before(:each) do
-        @admin = Factory(:user, :name => "Admin User", :admin => true)
-        controller.current_user = @admin
+      before do
+        @stories = 2.times.map { Factory.create :story }
       end
-      
-      it "should be successful" do
+
+      it "should get all stories" do
+        @admin = Factory.create(:user, :name => "Admin", :email => "admin@test.com", :admin => true)
+        test_sign_in(@admin)
         get 'admin'
-        response.should be_success
-      end
-      
-      let(:stories) { 2.times.map { Factory.create :story } }
-      it "should get all of them" do
-        get 'admin'
-        assigns(:stories).should eq(stories) 
+        @stories.map { |story| assigns(:stories).should include(story) }
       end
       
     end
@@ -40,13 +35,8 @@ describe PagesController do
     context "for non-admin users" do
       
       it "should redirect to root_path if logged in but non-admin" do
-        @user = Factory(:user)
-        controller.current_user = @user
-        get 'admin'
-        response.should redirect_to root_path
-      end
-      
-      it "should redirect to root_path if not logged in" do
+        @user = Factory.create(:user)
+        test_sign_in(@user)
         get 'admin'
         response.should redirect_to root_path
       end

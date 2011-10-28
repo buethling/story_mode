@@ -5,6 +5,4 @@ describe CharactersController do
     @user = Factory(:user)
     @story = Factory(:story)
   end
-  
-  it "should "
 end

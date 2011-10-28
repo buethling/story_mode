@@ -24,6 +24,12 @@ describe "Admin" do
       click_link("Admin")
       page.should have_content("Administration")
     end
+
+    it "should have a link to User#edit for current user" do
+      @user = Factory.create(:user, :email => "test1@test.com")
+      click_link("Admin")
+      page.should have_link(@user.name, :href => edit_user_path(@user))
+    end
   end
   context "for logged in non-admin users" do
     before(:each) do

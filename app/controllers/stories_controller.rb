@@ -7,7 +7,7 @@ class StoriesController < ApplicationController
     @title = "New Story"
     if signed_in?
       @story = Story.new
-      @count_opts = [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7]]
+      count_options 
     else
       redirect_to root_path
     end
@@ -15,11 +15,13 @@ class StoriesController < ApplicationController
 
   def create
     @story = current_user.stories.build(params[:story])
+    count_options 
+
     if @story.save
       flash[:success] = "Story created!"
-      redirect_to stories_path
+      redirect_to story_path(@story)
     else
-      render 'pages/home'
+      render 'new' 
     end
   end
 
@@ -56,4 +58,7 @@ class StoriesController < ApplicationController
       @story = Story.find(params[:id])
     end
 
+    def count_options
+      @count_opts = [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[7,7]]
+    end
 end

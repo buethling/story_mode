@@ -3,6 +3,7 @@ Factory.define :user do |user|
   user.email                 "test@test.com"
   user.password              "testicles"
   user.password_confirmation "testicles"
+  user.admin                  { false }
 end
 
 Factory.define :story do |story|

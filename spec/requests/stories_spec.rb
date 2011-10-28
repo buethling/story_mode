@@ -25,5 +25,29 @@ describe "Stories" do
       visit stories_path
       page.should have_content("Participants:")
     end
+
+    it "should error when title has too many characters" do
+      visit new_story_path
+      fill_in 'Title', :with => 'x' * 251
+      fill_in 'Blurb', :with => 'test'
+      click_button 'Create'
+      page.should have_content '1 error prohibited this story from being saved'
+    end
+
+    it "should error when blurb has too many characters" do
+      visit new_story_path
+      fill_in 'Title', :with => 'Test'
+      fill_in 'Blurb', :with => 'x' * 2501
+      click_button 'Create'
+      page.should have_content '1 error prohibited this story from being saved'
+    end
+
+    it "should redirect when story creation is successful" do
+      visit new_story_path
+      fill_in 'Title', :with => 'X' * 249
+      fill_in 'Blurb', :with => 'x' * 2499
+      click_button 'Create'
+      page.should have_content 'Story created!'
+    end
   end
 end
