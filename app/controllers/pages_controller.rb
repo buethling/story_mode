@@ -29,7 +29,8 @@ class PagesController < ApplicationController
   def admin
     if signed_in? && current_user.admin?
       @title = "Administration"
-      @stories = Story.all
+      @stories = Story.paginate(:page => params[:page], :per_page => 5)
+      @users   = User.paginate(:page => params[:page], :per_page => 5) 
     else
       redirect_to root_path
     end

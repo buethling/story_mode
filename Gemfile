@@ -8,9 +8,17 @@ gem 'will_paginate', '3.0.0'
 gem 'jquery-rails'
 
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
-  gem 'uglifier'
+#  gem 'sass-rails', "  ~> 3.1.0"
+#  gem 'coffee-rails', "~> 3.1.0"
+#  gem 'uglifier'
+
+  group :development, :test do 
+#    gem 'therubyracer'
+  end
+
+  group :production do 
+#    gem 'therubyracer-heroku'
+  end
 end
 
 group :development do
@@ -24,6 +32,7 @@ end
 group :test do
   gem 'simplecov'
   gem 'capybara'
+  gem 'factory_girl_rails'
 end
 
 group :development, :test do
@@ -33,7 +42,10 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'rb-fchange', :platforms => [:mswin, :mingw]
-  gem 'rb-notifu', :platforms => [:mswin, :mingw]
-  gem 'win32console', :platforms => [:mswin, :mingw]
+ 
+  platforms :mswin, :mingw do
+    gem 'rb-fchange'
+    gem 'rb-notifu'
+    gem 'win32console'
+  end
 end
